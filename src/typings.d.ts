@@ -1,7 +1,8 @@
-type GlbalConfig = {
+type GlobalConfig = {
   imgServer: string;
+  site: string;
 };
-declare const GLOBAL_CONFIG: GlbalConfig;
+declare const GLOBAL_CONFIG: GlobalConfig;
 
 type MovieChannelType = 'trending' | 'popular';
 

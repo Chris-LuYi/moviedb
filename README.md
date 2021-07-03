@@ -1,4 +1,4 @@
-# umi project
+# TMDB Movie DB website
 
 ## Getting Started
 

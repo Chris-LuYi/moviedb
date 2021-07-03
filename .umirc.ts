@@ -5,7 +5,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  mfsu: {},
+  // mfsu: {},
   dynamicImport: {
     loading: '@/components/PageLoading/index',
   },
@@ -49,6 +49,7 @@ export default defineConfig({
   define: {
     GLOBAL_CONFIG: {
       imgServer: 'https://www.themoviedb.org',
+      site: '— A TMDb Learning Site',
     },
   },
 });

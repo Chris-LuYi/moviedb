@@ -1,8 +1,8 @@
 import styles from './index.less';
 import { Input, Skeleton, Rate } from 'antd';
-import Icon from '@/components/Icon';
+import PageTitle from '@/components/PageTitle';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'umi';
+import { Helmet, Link } from 'umi';
 import { RootState } from '@/store';
 import { useEffect } from 'react';
 import { getMovie } from '@/models/movie';
@@ -35,6 +35,7 @@ export default function IndexPage({
     vote_average,
     vote_count,
     overview,
+    name,
     credits: { cast, crew },
   } = data;
 
@@ -47,6 +48,7 @@ export default function IndexPage({
 
   return (
     <div>
+      <PageTitle title={name || title} />
       <div
         className={styles.banner}
         style={{

@@ -3,6 +3,8 @@
 
 @background-main: #000;
 @text-color: #fff;
+@hover-shadow:0 3px 6px rgba(0,0, 0 ,0.3);
+
 html {
   --scrollerGrey: 219, 219, 219;
   --lightGrey: 227, 227, 227;
@@ -52,7 +54,9 @@ ul {
 ul {
   list-style-type: none;
 }
-
+a > img:hover {
+  box-shadow: @hover-shadow;
+}
 h1,
 h2,
 h3,
@@ -72,9 +76,6 @@ input {
 
   background-color: @background-main !important;
 }
-.ant-carousel {
-  color: #fff !important;
-}
 .ant-pro-top-nav-header,
 .ant-layout-content {
   width: 100%;
@@ -92,17 +93,6 @@ input {
   padding: 10px 40px;
   border: 1px solid #fff;
   border-radius: 2px;
-}
-.ant-carousel-vertical .slick-dots-right {
-  top: 40%;
-  right: -23px !important;
-}
-.ant-carousel-vertical .slick-dots li {
-  width: 26px !important;
-  margin: 7px !important;
-}
-.ant-carousel-vertical .slick-dots li button {
-  width: 100% !important;
 }
 .ant-radio-button-wrapper {
   background-color: transparent !important;

@@ -60,36 +60,42 @@ export default function IndexPage({
               <strong>
                 <bdi>Known For</bdi>
               </strong>
-              {known_for_department}
+              {known_for_department || '-'}
             </p>
             <p>
               <strong>
                 <bdi>Gender</bdi>
               </strong>
-              {gender === 1 ? 'Female' : gender === 2 ? 'Male' : 'Unknown'}
+              {gender === 1 ? 'Female' : gender === 2 ? 'Male' : '-'}
             </p>
             <p>
               <strong>
                 <bdi>Birthday</bdi>
               </strong>
-              {moment(birthday).format('LL')} (
-              {moment().diff(birthday, 'years', false)} years old)
+              {birthday
+                ? `${moment(birthday).format('LL')} (
+              ${moment().diff(birthday, 'years', false)} years old)`
+                : '-'}
             </p>
             <p>
               <strong>
                 <bdi>Place of Birth</bdi>
               </strong>
-              {place_of_birth}
+              {place_of_birth || '-'}
             </p>
             <p>
               <strong>
                 <bdi>Also Known As</bdi>
               </strong>
-              <ul>
-                {also_known_as.map((o) => {
-                  return <li key={o}>{o}</li>;
-                })}
-              </ul>
+              {also_known_as.length > 0 ? (
+                <ul>
+                  {also_known_as.map((o) => {
+                    return <li key={o}>{o}</li>;
+                  })}
+                </ul>
+              ) : (
+                '-'
+              )}
             </p>
           </section>
         </div>
@@ -97,10 +103,10 @@ export default function IndexPage({
       <div className={styles.info}>
         <h1>{name}</h1>
         <h4>Biography</h4>
-        <div>
-          {biography.split(/\n/g).map((o) => (
-            <p>{o}</p>
-          ))}
+        <div style={{ marginBottom: 20 }}>
+          {biography
+            ? biography.split(/\n/g).map((o, i) => <p key={i}>{o}</p>)
+            : `We don't have a biography for ${name}.`}
         </div>
         <h4>Known For</h4>
         <div className="know-for">
@@ -111,7 +117,7 @@ export default function IndexPage({
             )
               .reverse()
               .slice(0, 10)
-              .map(({ poster_path, title, commonName }) => {
+              .map(({ poster_path, title, commonName, id }) => {
                 return (
                   <li key={`${id}${commonName}`}>
                     <div>

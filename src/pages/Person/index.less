@@ -2,6 +2,7 @@
 @import '~antd/dist/antd.less';
 
 @bg-color: #95a5a6;
+@common-shadow:0 6px 6px rgba(0, 0, 0, 0.2);
 .root {
   color: #000;
   margin-top: 20px;
@@ -18,7 +19,7 @@
     }
     .timeline {
       padding: 10px;
-      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: @common-shadow;
       border: 1px solid rgba(#000, 0.8);
       border-radius: 5px;
     }
@@ -87,13 +88,15 @@
   :global {
     .know-for > ul {
       display: flex;
-      overflow-x: scroll;
+      overflow-x: auto;
       overflow-y: hidden;
       gap: 12px;
       text-align: center;
+      margin-bottom: 20px;
       img {
         border-radius: 10px;
       }
+
       p {
         font-size: smaller;
       }

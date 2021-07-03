@@ -8,6 +8,7 @@ import Icon from '@/components/Icon';
 import styles from './index.less';
 import request from 'umi-request';
 import store from '../store';
+import PageTitle from '@/components/PageTitle';
 
 request.use(async (ctx, next) => {
   if (!ctx.req.url.startsWith('http'))
@@ -24,9 +25,9 @@ request.use(async (ctx, next) => {
 });
 
 export default ({ children, ...restProps }: { children: React.ReactNode }) => {
-  const [keyWord, setKeyWord] = useState('');
   return (
     <Provider store={store}>
+      <PageTitle title={restProps.route?.name} />
       <div className={styles.root}>
         <ProLayout
           logo={
@@ -72,7 +73,7 @@ export default ({ children, ...restProps }: { children: React.ReactNode }) => {
             return (
               <footer className={styles.footer}>
                 © 2021 by{' '}
-                <a target="_blank" href="https://github.com/Chris-LuYi">
+                <a target="_blank" href="https://github.com/Chris-LuYi/moviedb">
                   Chris Lu Yi
                 </a>
               </footer>
