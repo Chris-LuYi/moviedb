@@ -1,0 +1,128 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~antd/dist/antd.less';
+
+@post-width: 220px;
+.banner {
+  color: #fff;
+  padding: 25px;
+  font-size: 1.5rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: 1700px;
+  background-position: center top;
+  background-image: linear-gradient(
+      to right,
+      rgba(var(--tmdbDarkBlue), 0.8) 0%,
+      rgba(var(--tmdbDarkBlue), 0) 100%
+    ),
+    url(../../../public/img/home-banner.png);
+  :global {
+    .search input {
+      border-radius: 10px;
+    }
+    .search .ant-input-group-addon,
+    .search .ant-input-group-addon button {
+      border-radius: 0 10px 10px 0 !important;
+      background-image: linear-gradient(
+        to right,
+        rgba(var(--tmdbLightGreen), 1) 0%,
+        rgba(var(--tmdbLightBlue), 1) 100%
+      );
+    }
+  }
+}
+.wrap {
+  width: @post-width;
+  min-width: @post-width;
+  height: calc(@post-width * 1.5);
+  min-height: calc(@post-width * 1.5);
+  overflow: hidden;
+  border-radius: var(--imageBorderRadius) var(--imageBorderRadius) 0 0;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  :global {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .ant-skeleton {
+      width: 100% !important;
+    }
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: height 0.5s linear;
+  :global {
+    .ant-pro-card-title {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.poster {
+  flex-direction: column-reverse !important;
+  max-width: @post-width !important;
+  padding: 0;
+
+  :global {
+    .poster-info {
+      display: flex;
+      flex-direction: column;
+      span.rate {
+        padding: 8px;
+      }
+    }
+
+    .poster-title {
+      min-height: 4.5rem;
+      a {
+        color: #fff;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        max-height: 3rem;
+        overflow: hidden;
+        padding-right: 8px;
+      }
+      a:hover {
+        color: @primary-color;
+      }
+    }
+    .poster-date {
+      color: #ccc;
+      font-size: smaller;
+    }
+    .ant-skeleton-active {
+      padding: 12px;
+      height: 30px;
+    }
+    .ant-skeleton-image,
+    .ant-skeleton-image > svg {
+      width: 100% !important;
+      height: calc(@post-width * 1.5);
+      min-height: calc(@post-width * 1.5);
+      // height: 100% !important;
+    }
+    .ant-skeleton-content h3 {
+      margin-top: 8px;
+    }
+  }
+}
+
+.h1 {
+  color: #fff;
+  font-weight: 600;
+  border-left: 3px solid @primary-color;
+  padding-left: 12px;
+  > span {
+    margin-right: 20px;
+  }
+}

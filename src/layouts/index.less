@@ -1,0 +1,39 @@
+.root {
+  background-color: #ccc;
+  height: 100vh;
+  :global {
+    .ant-pro-top-nav-header-main > div .ant-pro-top-nav-header .anticon {
+      color: inherit !important;
+    }
+    .header-top-right {
+      color: #fff;
+    }
+    .ant-input-search {
+    }
+    .anticon {
+      color: inherit !important;
+    }
+    .ant-input-group-wrapper {
+      vertical-align: middle;
+    }
+    @media (max-width: 768px) {
+      .header-top-right {
+        display: none;
+      }
+    }
+  }
+}
+.footer {
+  margin-top: 50px;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  background-image: radial-gradient(
+    at 30% top,
+    #031d33 0%,
+    rgba(var(--tmdbDarkBlue), 1) 70%
+  );
+  > a {
+    color: #fff;
+  }
+}

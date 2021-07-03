@@ -1,0 +1,102 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~antd/dist/antd.less';
+
+@bg-color: #95a5a6;
+.root {
+  color: #000;
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  min-height: calc(100vh - 190px);
+
+  :global {
+    h1,
+    h2,
+    h4 {
+      color: #000 !important;
+      font-weight: 600;
+    }
+    .timeline {
+      padding: 10px;
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(#000, 0.8);
+      border-radius: 5px;
+    }
+    .ant-timeline-item-tail {
+      border: 1px solid rgba(#000, 0.8);
+      height: calc(100% - 20px);
+      top: 14px;
+    }
+    .ant-timeline {
+      color: #000;
+      margin-left: 16px;
+    }
+    .ant-timeline-item-head {
+      background-color: transparent;
+      color: #000;
+    }
+    .ant-timeline-item {
+      border-bottom: 1px solid;
+      margin-left: 0px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+    .ant-timeline-item-content {
+      margin-left: 35px;
+      top: -5px;
+      > p {
+        margin: 0px;
+        margin-top: 5px;
+      }
+      a:hover {
+        font-weight: 600;
+      }
+      span {
+        font-size: smaller;
+        color: lighten(#000, 50%);
+        margin-left: 5px;
+      }
+    }
+  }
+}
+.personInfo {
+  flex-basis: 300px;
+  background-color: @bg-color;
+  border-radius: 10px;
+  overflow: hidden;
+
+  > img {
+    margin-bottom: 10px;
+  }
+  > div {
+    padding: 10px;
+  }
+  strong {
+    display: block;
+  }
+}
+.info {
+  flex: 1 1;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: lighten(@bg-color, 20%);
+
+  :global {
+    .know-for > ul {
+      display: flex;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      gap: 12px;
+      text-align: center;
+      img {
+        border-radius: 10px;
+      }
+      p {
+        font-size: smaller;
+      }
+    }
+  }
+}

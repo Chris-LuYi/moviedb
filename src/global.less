@@ -1,0 +1,124 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~antd/dist/antd.less';
+
+@background-main: #000;
+@text-color: #fff;
+html {
+  --scrollerGrey: 219, 219, 219;
+  --lightGrey: 227, 227, 227;
+  --darkerGrey: 200, 200, 200;
+  --tmdbDarkBlue: 3, 37, 65;
+  --tmdbLightBlue: 1, 180, 228;
+  --tmdbLighterGreen: 192, 254, 207;
+  --tmdbLightGreen: 30, 213, 169;
+  --tmdbLogoGreen: 144, 206, 161;
+  --tmdbLogoOrange: 253, 193, 112;
+  --tmdbLogoRed: 217, 59, 99;
+  --accountSilver: 149, 149, 149;
+  --accountPink: 234, 20, 140;
+  --accountPurple: 128, 91, 231;
+  --accountGreen: 1, 210, 119;
+  --accountTeal: 1, 198, 172;
+  --accountLightBlue: 1, 180, 228;
+  --accountBlue: 1, 119, 210;
+  --accountOrange: 210, 119, 1;
+  --accountYellow: 210, 144, 1;
+  --accountRed: 212, 2, 66;
+  --imageBorderRadius: 8px;
+  --maxPrimaryPageWidth: 1400px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000; /* color of the scroll thumb */
+  border-radius: 8px;
+}
+body {
+  font-size: 16px !important;
+  line-height: 1.2;
+}
+body,
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff !important;
+}
+.bold {
+  font-weight: 600;
+}
+input {
+  color: #000 !important;
+}
+.ant-layout {
+  color: #fff;
+
+  background-color: @background-main !important;
+}
+.ant-carousel {
+  color: #fff !important;
+}
+.ant-pro-top-nav-header,
+.ant-layout-content {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto !important;
+}
+.ant-pro-card {
+  background-color: transparent !important;
+}
+.ant-pro-card-ghost > .ant-pro-card-header {
+  background-color: lighten(@background-main, 20%);
+  border-radius: 0 0 var(--imageBorderRadius) var(--imageBorderRadius);
+}
+.slick-dots {
+  padding: 10px 40px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+.ant-carousel-vertical .slick-dots-right {
+  top: 40%;
+  right: -23px !important;
+}
+.ant-carousel-vertical .slick-dots li {
+  width: 26px !important;
+  margin: 7px !important;
+}
+.ant-carousel-vertical .slick-dots li button {
+  width: 100% !important;
+}
+.ant-radio-button-wrapper {
+  background-color: transparent !important;
+}
+.ant-radio-button-wrapper-checked {
+  background-color: #fff !important;
+}
+.ant-result-title,
+.ant-result-subtitle {
+  color: #fff !important;
+}
+.ant-pro-menu-item-title,
+.ant-menu-title-content svg {
+  font-size: x-large !important;
+  // color: darken(#fff, 50%);
+}
+.ant-menu-item-selected {
+  background-color: transparent !important;
+}
