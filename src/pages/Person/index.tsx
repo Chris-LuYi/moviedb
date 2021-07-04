@@ -63,7 +63,7 @@ export default function IndexPage({
         </div>
         <div>
           <h1>Person Info</h1>
-          <section>
+          <section className="description">
             <p>
               <strong>
                 <bdi>Known For</bdi>

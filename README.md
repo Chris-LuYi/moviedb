@@ -6,7 +6,7 @@
     <img src="public/fav.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">A React based movie DB we website</h3>
+  <h3 align="center">A React based movie DB website</h3>
 
   <p align="center">
     <a href="https://zen-franklin-214087.netlify.app/">Click to View</a>    

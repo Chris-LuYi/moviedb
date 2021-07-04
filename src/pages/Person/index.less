@@ -77,6 +77,7 @@
     display: block;
   }
 }
+
 .info {
   flex: 1 1;
   padding: 10px;
@@ -98,6 +99,28 @@
 
       p {
         font-size: smaller;
+      }
+    }
+  }
+}
+@media @tablet {
+  .root {
+    flex-direction: column;
+  }
+  .personInfo {
+    flex-basis: auto;
+    flex-direction: row;
+    display: flex;
+    > div:nth-child(1) {
+      margin-bottom: 0;
+    }
+    :global {
+      .description {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 380px;
+        gap: @common-gap-lg;
       }
     }
   }
