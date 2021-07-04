@@ -8,7 +8,7 @@ export default ({ dataSource }) => {
   const ref = useRef();
   if (!dataSource || dataSource.length === 0) return null;
   useEffect(() => {
-    if (ref.current) ref.current.height = window.innerHeight - 200;
+    if (ref.current) ref.current.height = window.innerHeight;
   }, [currentVideo]);
   return (
     <div className={styles.video}>
