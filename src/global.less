@@ -34,12 +34,11 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ccc;
+  background-color: rgba(#ccc, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000; /* color of the scroll thumb */
-  border-radius: 8px;
+  background: rgba(#ccc, 0.8);
 }
 body {
   font-size: 16px !important;
@@ -81,7 +80,7 @@ input {
 .ant-pro-top-nav-header,
 .ant-layout-content {
   width: 100%;
-  max-width: 1280px;
+  max-width: @max-page-width;
   margin: 0 auto !important;
 }
 .ant-pro-card {

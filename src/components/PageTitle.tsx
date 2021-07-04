@@ -1,4 +1,4 @@
-import { Helmet, Link } from 'umi';
+import { Helmet } from 'umi';
 
 export default ({
   title,
@@ -10,7 +10,7 @@ export default ({
   return (
     <Helmet>
       <title>
-        {title} {!replace && GLOBAL_CONFIG.site}
+        {title} {replace ? '' : `- ${GLOBAL_CONFIG.site}`}
       </title>
     </Helmet>
   );

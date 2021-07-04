@@ -1,31 +1,37 @@
 import styles from './index.less';
-import { Rate } from 'antd';
+import { Modal, Rate } from 'antd';
 import _ from 'lodash';
 import PageTitle from '@/components/PageTitle';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'umi';
 import { RootState } from '@/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getMovie } from '@/models/movie';
 import moment from 'moment';
 import { getPathName } from '@/utils';
 import notReady from '../../../public/img/not-ready.svg';
 import { PageLoading } from '@/components';
-
+import Icon from '@/components/Icon';
+import Video from './Video';
 const crewSortRank: any = {
+  Creator: 0,
   Director: 1,
   Screenplay: 2,
 };
 
-export default function IndexPage({
-  match: {
-    params: { id },
-  },
-}) {
+export default function IndexPage(props) {
+  const {
+    match: {
+      path,
+      params: { id },
+    },
+  } = props;
+
   const dispatch = useDispatch();
   const { entities, status } = useSelector((state: RootState) => state.movie);
+  const type = path.substring(1, path.indexOf('/', 1));
   useEffect(() => {
-    dispatch(getMovie({ id }));
+    dispatch(getMovie({ id, type }));
   }, []);
   const data = entities[id];
   if (!data) return <PageLoading />;
@@ -34,8 +40,10 @@ export default function IndexPage({
     poster_path,
     title,
     genres,
+    first_air_date,
     release_date,
     release_dates = { results: [] },
+    content_ratings,
     runtime,
     tagline,
     vote_average,
@@ -43,16 +51,22 @@ export default function IndexPage({
     overview,
     name,
     credits: { cast, crew },
+    created_by,
+    episode_run_time,
+    videos,
   } = data;
-
   const releaseInfo = release_dates.results.find((o) => o.iso_3166_1 === 'US');
-  const { certification } =
+  let { certification } =
     releaseInfo?.release_dates?.find((o) => o.certification) ||
     releaseInfo?.release_dates?.[0] ||
     {};
+  if (type === 'tv') {
+    certification = content_ratings.results.find((o) => o.iso_3166_1 === 'US')
+      ?.rating;
+  }
 
   return (
-    <div>
+    <div className={styles.root}>
       <PageTitle title={name || title} />
       <div
         className={styles.banner}
@@ -72,7 +86,9 @@ export default function IndexPage({
         />
         <div className={styles.overviewContent}>
           <h1>
-            {title} {release_date && `(${moment(release_date).format('YYYY')})`}
+            {title || name}{' '}
+            {release_date && `(${moment(release_date).format('YYYY')})`}
+            {first_air_date && `(${moment(first_air_date).format('YYYY')})`}
           </h1>
 
           {certification && (
@@ -92,7 +108,9 @@ export default function IndexPage({
                     </span>
                   ))}
                 </span>
-                <span className="section">{runtime} minutes</span>
+                <span className="section">
+                  {runtime || episode_run_time[0]} minutes
+                </span>
               </h3>
             </>
           )}
@@ -117,7 +135,9 @@ export default function IndexPage({
 
           <div className="crew">
             {_.sortBy(
-              crew.filter((o) => ['Director', 'Screenplay'].includes(o.job)),
+              crew.filter((o) =>
+                ['Creator', 'Director', 'Screenplay'].includes(o.job),
+              ),
               (o) => crewSortRank[o.job],
             ).map((o, i) => {
               return (
@@ -127,9 +147,20 @@ export default function IndexPage({
                 </div>
               );
             })}
+            {created_by &&
+              created_by.map((o, i) => {
+                return (
+                  <div key={i}>
+                    <span>{o.name}</span>
+                    <span>Creator</span>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
+      <Video dataSource={videos?.results} />
+
       <div className={styles.castcrew}>
         <section>
           <h1>Cast {cast.length}</h1>

@@ -10,7 +10,7 @@ export default ({ list, type }: { list: any[]; type: 'movie' | 'tv' }) => {
         const date = o.release_date || o.first_air_date;
         return (
           <div className="movietv" key={o.id}>
-            <Link to={`/${type}/${o.id}/${getPathName(o.title)}`}>
+            <Link to={`/${type}/${o.id}/${getPathName(o.title || o.name)}`}>
               <img
                 src={
                   o.poster_path
@@ -20,7 +20,7 @@ export default ({ list, type }: { list: any[]; type: 'movie' | 'tv' }) => {
               />
             </Link>
             <section>
-              <Link to={`/${type}/${o.id}/${getPathName(o.title)}`}>
+              <Link to={`/${type}/${o.id}/${getPathName(o.title || o.name)}`}>
                 <h3>{o.title || o.name}</h3>
               </Link>
               {date && (

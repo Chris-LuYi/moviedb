@@ -1,9 +1,9 @@
 import { PageLoading } from '@ant-design/pro-layout';
 import { Skeleton } from 'antd';
-
+import styles from './index.less';
 export default () => {
   return (
-    <div style={{ marginTop: 150 }}>
+    <div className={styles.root}>
       <Skeleton active />
       <br />
       <Skeleton active />

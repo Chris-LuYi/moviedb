@@ -3,7 +3,7 @@ import { Radio, Input } from 'antd';
 import styles from './index.less';
 import { useDispatch } from 'react-redux';
 import { getTrendingList } from '@/models/home';
-import { Search } from '@/components';
+import { PageTitle, Search } from '@/components';
 import { history } from 'umi';
 
 import { useEffect } from 'react';
@@ -29,6 +29,8 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <PageTitle title={GLOBAL_CONFIG.site} replace />
+
       <ProCard gutter={[16, 16]} wrap ghost>
         <section className={styles.banner}>
           <div className="title">

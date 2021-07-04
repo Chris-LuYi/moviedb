@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import request from 'umi-request';
 import { getReduxAsyncBuilder, getReduxInitialState } from '@/utils/redux';
 
-export const getMovie = createAsyncThunk('movie/query', async ({ id }: any) => {
-  return request(
-    `/3/movie/${id}?language=en-US&append_to_response=release_dates,credits`,
-  );
-});
+export const getMovie = createAsyncThunk(
+  'movie/query',
+  async ({ id, type = 'movie' }: any) => {
+    return request(
+      `/3/${type}/${id}?language=en-US&append_to_response=release_dates,credits,content_ratings,videos`,
+    );
+  },
+);
 
 const { initialState, adapter } = getReduxInitialState();
 export const slice = createSlice({

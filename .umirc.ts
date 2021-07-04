@@ -35,6 +35,7 @@ export default defineConfig({
         },
         { path: '/search/:query', component: '@/pages/Search' },
         { path: '/movie/:id/:name', component: '@/pages/Movie' },
+        { path: '/tv/:id/:name', component: '@/pages/Movie' },
         { path: '/person/:id/:name', component: '@/pages/Person' },
         {
           component: './404',
@@ -50,7 +51,7 @@ export default defineConfig({
   define: {
     GLOBAL_CONFIG: {
       imgServer: 'https://www.themoviedb.org',
-      site: '— A TMDb Learning Site',
+      site: 'My Movie DB',
     },
   },
 });
