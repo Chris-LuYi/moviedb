@@ -130,7 +130,7 @@ export default function IndexPage(props) {
           </section>
           {tagline && <p className="tagline">{tagline}</p>}
 
-          <h2 style={{ marginTop: 10, marginBottom: 0 }}>Overview</h2>
+          <h3>Overview</h3>
           <div className="description">{overview}</div>
 
           <div className="crew">
