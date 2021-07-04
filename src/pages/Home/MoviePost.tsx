@@ -7,15 +7,9 @@ import moment from 'moment';
 
 import { getPathName } from '@/utils';
 
-export default (movieInfo: MoviePostInfo) => {
-  const {
-    id,
-    title,
-    name,
-    poster_path,
-    vote_average,
-    release_date,
-  } = movieInfo;
+export default ({ data }: { data: MoviePostInfo }) => {
+  const { id, title, name, poster_path, vote_average, release_date } = data;
+  const isTV = !!name;
   return (
     <ProCard
       className={styles.poster}
@@ -36,7 +30,11 @@ export default (movieInfo: MoviePostInfo) => {
               <span className="rate">{vote_average}</span>
             </div>
             <div className="poster-title">
-              <Link to={`/movie/${id}/${getPathName(title || name)}`}>
+              <Link
+                to={`/${isTV ? 'tv' : 'movie'}/${id}/${getPathName(
+                  title || name,
+                )}`}
+              >
                 <span>{title || name}</span>
               </Link>
               <span className="poster-date">
@@ -51,7 +49,9 @@ export default (movieInfo: MoviePostInfo) => {
     >
       <div className={styles.wrap}>
         {poster_path ? (
-          <Link to={`/movie/${id}/${getPathName(title || name)}`}>
+          <Link
+            to={`/${isTV ? 'tv' : 'movie'}/${id}/${getPathName(title || name)}`}
+          >
             <img
               src={
                 'https://www.themoviedb.org/t/p/w220_and_h330_face/' +

@@ -6,7 +6,7 @@ import styles from './index.less';
 export default ({ dataSource }) => {
   const [currentVideo, setCurrentVideo] = useState();
   const ref = useRef();
-  if (!dataSource) return null;
+  if (!dataSource || dataSource.length === 0) return null;
   useEffect(() => {
     if (ref.current) ref.current.height = window.innerHeight - 200;
   }, [currentVideo]);

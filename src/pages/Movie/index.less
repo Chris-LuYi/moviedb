@@ -41,6 +41,7 @@
   display: flex;
   padding: 25px 0;
   min-height: 510px;
+  margin-bottom: @common-margin-lg;
   > img {
     border-radius: 10px;
     width: 300px;
@@ -160,6 +161,7 @@
 .video {
   z-index: 2;
   position: relative;
+  margin-bottom: @common-margin-lg;
   > div {
     display: flex;
     overflow-x: auto;
@@ -173,11 +175,11 @@
       display: flex;
       align-items: center;
       flex-direction: column;
-      border-radius: 10px;
       overflow: hidden;
       position: relative;
       > img {
         width: 100%;
+        border-radius: @common-radius-md;
       }
       > div:nth-child(2) {
         font-size: 80px;
@@ -195,6 +197,7 @@
         overflow: hidden;
         margin: 0;
         font-size: smaller;
+        padding: @common-padding-sm;
       }
     }
   }

@@ -41,7 +41,7 @@ export default ({
               <div className={styles.group}>
                 {sub.map((m) => {
                   //@ts-ignore
-                  return <MoviePost key={m.id} {...m} />;
+                  return <MoviePost key={m.id} data={m} />;
                 })}
               </div>
             </div>

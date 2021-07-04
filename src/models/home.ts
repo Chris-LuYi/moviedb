@@ -12,7 +12,7 @@ export const getTrendingList = createAsyncThunk(
     // await sleep(100000);
     switch (category) {
       case 'trending':
-        return request('/3/trending/movie/' + type);
+        return request('/3/trending/all/' + type);
       case 'popular':
         return request('/3/' + platform + '/popular');
 

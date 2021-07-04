@@ -44,23 +44,21 @@ const Home = () => {
         <MoviePanel
           title="What's Popular"
           type="popular"
-          // filter={
-          //   <Radio.Group
-          //     defaultValue="day"
-          //     buttonStyle="outline"
-          //     onChange={(e) =>
-          //       searchTrending({
-          //         platform: e.target.value,
-          //         category: 'popular',
-          //       })
-          //     }
-          //   >
-          //     <Radio.Button value="movie">Streaming</Radio.Button>
-          //     <Radio.Button value="tv">On TV</Radio.Button>
-          //     <Radio.Button value="week">For Rent</Radio.Button>
-          //     <Radio.Button value="week">In Theaters</Radio.Button>
-          //   </Radio.Group>
-          // }
+          filter={
+            <Radio.Group
+              defaultValue="movie"
+              buttonStyle="outline"
+              onChange={(e) =>
+                searchTrending({
+                  platform: e.target.value,
+                  category: 'popular',
+                })
+              }
+            >
+              <Radio.Button value="movie">Movie</Radio.Button>
+              <Radio.Button value="tv">TV</Radio.Button>
+            </Radio.Group>
+          }
         />
         <MoviePanel
           title="Trending"
