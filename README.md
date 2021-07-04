@@ -9,9 +9,7 @@
   <h3 align="center">A React based movie DB we website</h3>
 
   <p align="center">
-    An movie info website powered by <a href="https://www.themoviedb.org/documentation/api">The Movie DB API</a>
-    <a href="https://zen-franklin-214087.netlify.app/">View</a>
-    
+    <a href="https://zen-franklin-214087.netlify.app/">Click to View</a>    
   </p>
 </p>
 
@@ -29,6 +27,8 @@ Build this project for fun :smile:
 * [React](https://reactjs.org/)
 * [UmiJS](https://umijs.org/)
 * [Ant Design](https://ant.design/)
+* [The Movie DB API](https://www.themoviedb.org/documentation/api)
+
 
 ### Installation
 
