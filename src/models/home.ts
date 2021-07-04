@@ -1,38 +1,11 @@
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-  createEntityAdapter,
-} from '@reduxjs/toolkit';
-import request, { extend } from 'umi-request';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import request from 'umi-request';
+import { getReduxAsyncBuilder, getReduxInitialState } from '@/utils/redux';
 
-const globalTimeout = global.setTimeout;
-export const sleep = async (timeout = 0) => {
-  await new Promise((resolve) => globalTimeout(resolve, timeout));
-};
-
-const trendingAdapter = createEntityAdapter<MoviePostInfo>();
-
-const defaultItems = [];
+const defaultItems: Record<string, number>[] = [];
 for (let index = 0; index < 20; index++) {
   defaultItems.push({ id: index });
 }
-const initialState = trendingAdapter.getInitialState({
-  status: {
-    trending: 'idle',
-    popular: 'idle',
-  },
-  entities: {
-    trending: {
-      id: 'trending',
-      data: [],
-    },
-    popular: {
-      id: 'popular',
-      data: [],
-    },
-  },
-});
 export const getTrendingList = createAsyncThunk(
   'home/query',
   async ({ type, category, platform }: any) => {
@@ -48,67 +21,73 @@ export const getTrendingList = createAsyncThunk(
     }
   },
 );
+
+const { initialState, adapter } = getReduxInitialState({
+  status: {
+    trending: 'idle',
+    popular: 'idle',
+  },
+  entities: {
+    trending: {
+      id: 'trending',
+      data: [],
+    },
+    popular: {
+      id: 'popular',
+      data: [],
+    },
+  },
+});
+
 export const slice = createSlice({
   name: 'home',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(
-        getTrendingList.pending,
-        (
-          state,
-          {
-            meta: {
-              arg: { category },
-            },
-            payload,
-          },
-        ) => {
-          state.status[category] = 'processing';
-          const current = state.entities[category];
-          trendingAdapter.setOne(state, {
-            ...current,
-            data: defaultItems,
-          });
+  extraReducers: getReduxAsyncBuilder({
+    thunk: getTrendingList,
+    onStart: (
+      state,
+      {
+        meta: {
+          arg: { category },
         },
-      )
-      .addCase(
-        getTrendingList.rejected,
-        (
-          state,
-          {
-            meta: {
-              arg: { category },
-            },
-            payload,
-          },
-        ) => {
-          state.status[category] = 'idle';
+      },
+    ) => {
+      state.status[category] = 'processing';
+      const current = state.entities[category];
+      adapter.setOne(state, {
+        ...current,
+        data: defaultItems,
+      });
+    },
+    onReject: (
+      state,
+      {
+        meta: {
+          arg: { category },
         },
-      )
-      .addCase(
-        getTrendingList.fulfilled,
-        (
-          state,
-          {
-            meta: {
-              arg: { category },
-            },
-            payload,
-          },
-        ) => {
-          console.log(category);
-          state.status[category] = 'idle';
-          const current = state.entities[category];
-          //@ts-ignore
-          trendingAdapter.setOne(state, {
-            ...current,
-            data: payload.results,
-          });
+      },
+    ) => {
+      state.status[category] = 'idle';
+    },
+    onComplete: (
+      state,
+      {
+        meta: {
+          arg: { category },
         },
-      );
-  },
+        payload,
+      },
+    ) => {
+      state.status[category] = 'idle';
+      const current = state.entities[category];
+      //@ts-ignore
+      adapter.setOne(state, {
+        ...current,
+        data: payload.results,
+      });
+    },
+  }),
 });
 
 export default slice.reducer;

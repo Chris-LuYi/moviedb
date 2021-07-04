@@ -1,3 +1,5 @@
+@import '../styles/default.less';
+
 .root {
   background-color: #ccc;
   height: 100vh;
@@ -7,8 +9,16 @@
     }
     .header-top-right {
       color: #fff;
-    }
-    .ant-input-search {
+      align-items: center;
+      display: flex;
+      gap: @common-gap-lg;
+      > a {
+        color: white;
+        font-size: xx-large;
+        :hover {
+          color: rgba(var(--tmdbLogoGreen), 0.8);
+        }
+      }
     }
     .anticon {
       color: inherit !important;
@@ -35,5 +45,18 @@
   );
   > a {
     color: #fff;
+  }
+}
+
+.header {
+  height: 100%;
+  display: flex;
+  max-width: @max-page-width;
+  margin: 0 auto;
+  justify-content: space-between;
+  :global {
+    .logo {
+      height: 35px;
+    }
   }
 }

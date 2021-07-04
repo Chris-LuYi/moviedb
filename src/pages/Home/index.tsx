@@ -1,12 +1,11 @@
 import ProCard from '@ant-design/pro-card';
-import { Carousel, Radio, Input } from 'antd';
-import { chunk } from 'lodash';
-import useHome from './hook';
+import { Radio, Input } from 'antd';
 import styles from './index.less';
-import MoviePost from './MoviePost';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store';
+import { useDispatch } from 'react-redux';
 import { getTrendingList } from '@/models/home';
+import { Search } from '@/components';
+import { history } from 'umi';
+
 import { useEffect } from 'react';
 
 import MoviePanel from './MoviePanel';
@@ -38,15 +37,29 @@ const Home = () => {
               Millions of movies, TV shows and people to discover. Explore now.
             </h3>
           </div>
-          <Input.Search
-            placeholder="Search for a movie, tv show, person......"
-            enterButton="Search"
-            size="large"
-            className="search"
-            onSearch={() => {}}
-          />
+          <Search />
         </section>
-
+        <MoviePanel
+          title="What's Popular"
+          type="popular"
+          // filter={
+          //   <Radio.Group
+          //     defaultValue="day"
+          //     buttonStyle="outline"
+          //     onChange={(e) =>
+          //       searchTrending({
+          //         platform: e.target.value,
+          //         category: 'popular',
+          //       })
+          //     }
+          //   >
+          //     <Radio.Button value="movie">Streaming</Radio.Button>
+          //     <Radio.Button value="tv">On TV</Radio.Button>
+          //     <Radio.Button value="week">For Rent</Radio.Button>
+          //     <Radio.Button value="week">In Theaters</Radio.Button>
+          //   </Radio.Group>
+          // }
+        />
         <MoviePanel
           title="Trending"
           type="trending"
@@ -63,28 +76,6 @@ const Home = () => {
             >
               <Radio.Button value="day">Today</Radio.Button>
               <Radio.Button value="week">This Week</Radio.Button>
-            </Radio.Group>
-          }
-        />
-
-        <MoviePanel
-          title="What's Popular"
-          type="popular"
-          filter={
-            <Radio.Group
-              defaultValue="day"
-              buttonStyle="outline"
-              onChange={(e) =>
-                searchTrending({
-                  platform: e.target.value,
-                  category: 'popular',
-                })
-              }
-            >
-              <Radio.Button value="movie">Streaming</Radio.Button>
-              <Radio.Button value="tv">On TV</Radio.Button>
-              <Radio.Button value="week">For Rent</Radio.Button>
-              <Radio.Button value="week">In Theaters</Radio.Button>
             </Radio.Group>
           }
         />

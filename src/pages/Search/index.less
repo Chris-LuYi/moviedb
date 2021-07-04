@@ -1,0 +1,118 @@
+@import '../../styles/default.less';
+
+.root {
+  color: #000;
+  margin-top: @common-margin-lg;
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: auto;
+  gap: @common-gap-lg;
+  min-height: @content-min-height;
+  grid-template-areas:
+    'header header header header'
+    'main main main main';
+  grid-template-rows: min-content 1fr;
+  :global {
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #000 !important;
+      font-weight: 600;
+    }
+
+    img {
+      // border-radius: @common-radius-sm;
+    }
+    .search {
+      grid-area: header;
+    }
+  }
+}
+.category {
+  display: none;
+  grid-area: sidebar;
+  background-color: @bg-color;
+  border-radius: @common-radius-lg;
+  flex-basis: 200px;
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: @common-gap-lg;
+    padding: @common-padding-lg;
+  }
+}
+.list {
+  grid-area: main;
+
+  flex: 1 1;
+  padding: @common-padding-lg;
+  border-radius: @common-radius-lg;
+  overflow: hidden;
+  background-color: @bg-color-light;
+
+  > section {
+    gap: @common-gap-sm;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: @common-margin-lg;
+  }
+
+  :global {
+    h1 {
+      font-size: x-large;
+      margin-bottom: 0;
+    }
+    h3 {
+      // font-size: smaller;
+      margin-bottom: 0;
+    }
+    .person {
+      display: flex;
+      gap: @common-gap-md;
+      img,
+      svg {
+        width: 70px;
+        height: 70px;
+      }
+      img {
+        border-radius: @common-radius-sm;
+      }
+    }
+    .movietv {
+      display: flex;
+      gap: @common-gap-md;
+      border: @common-border;
+      box-shadow: @common-shadow;
+      border-radius: @common-radius-md;
+      overflow: hidden;
+      margin-bottom: @common-margin-md;
+      img,
+      svg {
+        min-width: 94px;
+        width: 94px;
+        height: 141px;
+      }
+      :global {
+        h3 {
+          margin-top: 4px;
+        }
+        .date {
+          font-size: smaller;
+          color: lighten(#000, 50%);
+        }
+        .overview {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          margin: 0;
+          padding-right: @common-padding-md;
+          font-size: smaller;
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,12 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~antd/dist/antd.less';
+@import '../../styles/default.less';
 
-@bg-color: #95a5a6;
 @common-shadow:0 6px 6px rgba(0, 0, 0, 0.2);
 .root {
   color: #000;
   margin-top: 20px;
   display: flex;
   gap: 20px;
-  min-height: calc(100vh - 190px);
+  min-height: @content-min-height;
 
   :global {
     h1,
@@ -20,11 +18,11 @@
     .timeline {
       padding: 10px;
       box-shadow: @common-shadow;
-      border: 1px solid rgba(#000, 0.8);
-      border-radius: 5px;
+      border: @common-border;
+      border-radius: @common-radius-md;
     }
     .ant-timeline-item-tail {
-      border: 1px solid rgba(#000, 0.8);
+      border: @common-border;
       height: calc(100% - 20px);
       top: 14px;
     }
@@ -65,13 +63,14 @@
 .personInfo {
   flex-basis: 300px;
   background-color: @bg-color;
-  border-radius: 10px;
+  border-radius: @common-radius-lg;
   overflow: hidden;
 
-  > img {
+  > div:nth-child(1) {
+    background-color: @bg-color-notfound;
     margin-bottom: 10px;
   }
-  > div {
+  > div:nth-child(2) {
     padding: 10px;
   }
   strong {
@@ -81,9 +80,9 @@
 .info {
   flex: 1 1;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: @common-radius-lg;
   overflow: hidden;
-  background-color: lighten(@bg-color, 20%);
+  background-color: @bg-color-light;
 
   :global {
     .know-for > ul {
@@ -94,7 +93,7 @@
       text-align: center;
       margin-bottom: 20px;
       img {
-        border-radius: 10px;
+        border-radius: @common-radius-lg;
       }
 
       p {

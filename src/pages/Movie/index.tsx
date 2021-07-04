@@ -1,14 +1,22 @@
 import styles from './index.less';
-import { Input, Skeleton, Rate } from 'antd';
+import { Rate } from 'antd';
+import _ from 'lodash';
 import PageTitle from '@/components/PageTitle';
 import { useSelector, useDispatch } from 'react-redux';
-import { Helmet, Link } from 'umi';
+import { Link } from 'umi';
 import { RootState } from '@/store';
 import { useEffect } from 'react';
 import { getMovie } from '@/models/movie';
 import moment from 'moment';
 import { getPathName } from '@/utils';
 import notReady from '../../../public/img/not-ready.svg';
+import { PageLoading } from '@/components';
+
+const crewSortRank: any = {
+  Director: 1,
+  Screenplay: 2,
+};
+
 export default function IndexPage({
   match: {
     params: { id },
@@ -16,13 +24,11 @@ export default function IndexPage({
 }) {
   const dispatch = useDispatch();
   const { entities, status } = useSelector((state: RootState) => state.movie);
-  console.log(entities, status);
   useEffect(() => {
     dispatch(getMovie({ id }));
   }, []);
   const data = entities[id];
-  if (!data) return <Skeleton />;
-  console.log(data);
+  if (!data) return <PageLoading />;
   const {
     backdrop_path,
     poster_path,
@@ -40,7 +46,6 @@ export default function IndexPage({
   } = data;
 
   const releaseInfo = release_dates.results.find((o) => o.iso_3166_1 === 'US');
-  console.log(releaseInfo?.release_dates?.[0]);
   const { certification } =
     releaseInfo?.release_dates?.find((o) => o.certification) ||
     releaseInfo?.release_dates?.[0] ||
@@ -79,12 +84,12 @@ export default function IndexPage({
                 </span>
                 <span className="section">
                   {genres.map((o, i) => (
-                    <>
+                    <span key={o.id}>
                       <Link to={`/genre/${o.id}-${o.name.toLowerCase()}/movie`}>
                         {o.name}
                       </Link>
                       {i !== genres.length - 1 && ', '}
-                    </>
+                    </span>
                   ))}
                 </span>
                 <span className="section">{runtime} minutes</span>
@@ -111,16 +116,17 @@ export default function IndexPage({
           <div className="description">{overview}</div>
 
           <div className="crew">
-            {crew
-              .filter((o) => ['Director', 'Screenplay'].includes(o.job))
-              .map((o) => {
-                return (
-                  <div>
-                    <span>{o.name}</span>
-                    <span>{o.job}</span>
-                  </div>
-                );
-              })}
+            {_.sortBy(
+              crew.filter((o) => ['Director', 'Screenplay'].includes(o.job)),
+              (o) => crewSortRank[o.job],
+            ).map((o, i) => {
+              return (
+                <div key={i}>
+                  <span>{o.name}</span>
+                  <span>{o.job}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -130,9 +136,8 @@ export default function IndexPage({
           <div className={styles.casts}>
             {cast.map((o) => {
               const { profile_path, name, character, id: pid } = o;
-              console.log(o);
               return (
-                <div>
+                <div key={pid}>
                   <Link
                     className="avatar"
                     to={`/person/${pid}/${getPathName(name)}`}

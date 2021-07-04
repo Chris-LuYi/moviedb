@@ -15,7 +15,7 @@ export default ({
   type,
 }: {
   title: string;
-  filter: React.ReactNode;
+  filter?: React.ReactNode;
   type: MovieChannelType;
 }) => {
   const { entities, status } = useSelector((state: RootState) => state.home);
@@ -34,13 +34,14 @@ export default ({
       <div className={styles.prev} onClick={ref.current?.prev}>
         <Icon type="left" />
       </div>
-      <Carousel ref={ref} dotPosition="right" dots={false}>
+      <Carousel ref={ref} dots={false}>
         {chunk(data, 5).map((sub, i) => {
           return (
             <div key={i}>
               <div className={styles.group}>
                 {sub.map((m) => {
-                  return <MoviePost {...m} />;
+                  //@ts-ignore
+                  return <MoviePost key={m.id} {...m} />;
                 })}
               </div>
             </div>

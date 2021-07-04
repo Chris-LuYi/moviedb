@@ -33,7 +33,8 @@ export default defineConfig({
           name: 'TV',
           component: './UnderDevelopment',
         },
-        { path: '/movie/:id/:name', component: '@/pages/Detail' },
+        { path: '/search/:query', component: '@/pages/Search' },
+        { path: '/movie/:id/:name', component: '@/pages/Movie' },
         { path: '/person/:id/:name', component: '@/pages/Person' },
         {
           component: './404',

@@ -1,6 +1,5 @@
 import styles from './index.less';
-import { Input, Skeleton, Rate, Timeline } from 'antd';
-import Icon from '@/components/Icon';
+import { Timeline } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'umi';
 import { RootState } from '@/store';
@@ -9,6 +8,8 @@ import { getSingle } from '@/models/person';
 import moment from 'moment';
 import { getPathName } from '@/utils';
 import _ from 'lodash';
+import { PageTitle, PageLoading } from '@/components';
+import notFoundPerson from '../../../public/img/no-photo-male.svg';
 
 export default function IndexPage({
   match: {
@@ -17,17 +18,16 @@ export default function IndexPage({
 }) {
   const dispatch = useDispatch();
   const { entities, status } = useSelector((state: RootState) => state.person);
-  console.log(entities, status);
   useEffect(() => {
     dispatch(getSingle({ id }));
   }, []);
   const data = entities[id];
-  if (!data) return <Skeleton />;
-  console.log(data);
+  if (!data) return <PageLoading />;
   const {
     profile_path,
     known_for_department,
     gender,
+    deathday,
     birthday,
     place_of_birth,
     also_known_as,
@@ -49,10 +49,18 @@ export default function IndexPage({
   const groupYears = _.groupBy(totalCast, 'year');
   return (
     <div className={styles.root}>
+      <PageTitle title={name} />
+
       <div className={styles.personInfo}>
-        <img
-          src={`${GLOBAL_CONFIG.imgServer}/t/p/w300_and_h450_bestv2${profile_path}`}
-        />
+        <div>
+          <img
+            src={
+              profile_path
+                ? `${GLOBAL_CONFIG.imgServer}/t/p/w300_and_h450_bestv2${profile_path}`
+                : notFoundPerson
+            }
+          />
+        </div>
         <div>
           <h1>Person Info</h1>
           <section>
@@ -73,8 +81,9 @@ export default function IndexPage({
                 <bdi>Birthday</bdi>
               </strong>
               {birthday
-                ? `${moment(birthday).format('LL')} (
-              ${moment().diff(birthday, 'years', false)} years old)`
+                ? `${moment(birthday).format('LL')} (${moment(
+                    deathday || new Date(),
+                  ).diff(birthday, 'years', false)} years old)`
                 : '-'}
             </p>
             <p>
@@ -108,79 +117,87 @@ export default function IndexPage({
             ? biography.split(/\n/g).map((o, i) => <p key={i}>{o}</p>)
             : `We don't have a biography for ${name}.`}
         </div>
-        <h4>Known For</h4>
-        <div className="know-for">
-          <ul>
-            {_.sortBy(
-              totalCast.filter((o) => o.poster_path),
-              (o) => o.popularity,
-            )
-              .reverse()
-              .slice(0, 10)
-              .map(({ poster_path, title, commonName, id }) => {
-                return (
-                  <li key={`${id}${commonName}`}>
-                    <div>
-                      <Link
-                        to={`/${title ? 'movie' : 'tv'}/${id}/${getPathName(
-                          commonName,
-                        )}`}
-                      >
-                        <img
-                          src={`${GLOBAL_CONFIG.imgServer}/t/p/w150_and_h225_bestv2${poster_path}`}
-                        />
-                      </Link>
-
-                      <p>{commonName}</p>
-                    </div>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        <h4>Acting</h4>
-        <div className="timeline">
-          <Timeline>
-            {_.sortBy(Object.keys(groupYears))
-              .reverse()
-              .map((o) => {
-                const works = groupYears[o];
-                return (
-                  <Timeline.Item dot={o || '-'} key={id}>
-                    {works.map((w) => {
-                      const {
-                        id,
-                        title,
-                        commonName,
-                        character,
-                        episode_count,
-                      } = w;
-
-                      return (
-                        <p key={commonName}>
+        {totalCast.length > 0 && (
+          <>
+            <h4>Known For</h4>
+            <div className="know-for">
+              <ul>
+                {_.sortBy(
+                  totalCast.filter((o) => o.poster_path),
+                  (o) => o.popularity,
+                )
+                  .reverse()
+                  .slice(0, 10)
+                  .map(({ poster_path, title, commonName, id }) => {
+                    return (
+                      <li key={`${id}${commonName}`}>
+                        <div>
                           <Link
                             to={`/${title ? 'movie' : 'tv'}/${id}/${getPathName(
                               commonName,
                             )}`}
                           >
-                            {commonName}
+                            <img
+                              src={`${GLOBAL_CONFIG.imgServer}/t/p/w150_and_h225_bestv2${poster_path}`}
+                            />
                           </Link>
-                          {episode_count && (
-                            <span>
-                              ({episode_count} episode
-                              {episode_count > 1 ? 's' : ''})
-                            </span>
-                          )}
-                          {character && <span>as </span>}
-                          {character}
-                        </p>
-                      );
-                    })}
-                  </Timeline.Item>
-                );
-              })}
-          </Timeline>
-        </div>
+
+                          <p>{commonName}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          </>
+        )}
+        {Object.entries(groupYears).length > 0 && (
+          <>
+            <h4>Acting</h4>
+            <div className="timeline">
+              <Timeline>
+                {_.sortBy(Object.keys(groupYears))
+                  .reverse()
+                  .map((o, i) => {
+                    const works = groupYears[o];
+                    return (
+                      <Timeline.Item dot={o || '-'} key={o}>
+                        {works.map((w) => {
+                          const {
+                            id,
+                            title,
+                            commonName,
+                            character,
+                            episode_count,
+                          } = w;
+
+                          return (
+                            <p key={`${id}${commonName}`}>
+                              <Link
+                                to={`/${
+                                  title ? 'movie' : 'tv'
+                                }/${id}/${getPathName(commonName)}`}
+                              >
+                                {commonName}
+                              </Link>
+                              {episode_count && (
+                                <span>
+                                  ({episode_count} episode
+                                  {episode_count > 1 ? 's' : ''})
+                                </span>
+                              )}
+                              {character && <span>as </span>}
+                              {character}
+                            </p>
+                          );
+                        })}
+                      </Timeline.Item>
+                    );
+                  })}
+              </Timeline>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

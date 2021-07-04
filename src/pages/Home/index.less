@@ -1,7 +1,10 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~antd/dist/antd.less';
+@import '../../styles/default.less';
+
+@desktop: ~'only screen and (min-width: 1080px)';
+@tablet: ~'only screen and (max-width: 1079px)';
 
 @post-width: 220px;
+
 .banner {
   color: #fff;
   padding: 25px;
@@ -18,20 +21,6 @@
       rgba(var(--tmdbDarkBlue), 0) 100%
     ),
     url(../../../public/img/home-banner.png);
-  :global {
-    .search input {
-      border-radius: 10px;
-    }
-    .search .ant-input-group-addon,
-    .search .ant-input-group-addon button {
-      border-radius: 0 10px 10px 0 !important;
-      background-image: linear-gradient(
-        to right,
-        rgba(var(--tmdbLightGreen), 1) 0%,
-        rgba(var(--tmdbLightBlue), 1) 100%
-      );
-    }
-  }
 }
 .wrap {
   width: @post-width;
@@ -71,8 +60,12 @@
   flex-direction: column-reverse !important;
   max-width: @post-width !important;
   padding: 0;
+  overflow: hidden;
 
   :global {
+    // .ant-rate {
+    //   color: rgba(var(--accountBlue)) !important;
+    // }
     .poster-info {
       display: flex;
       flex-direction: column;
@@ -116,7 +109,16 @@
     }
   }
 }
-
+@media @tablet {
+  .poster {
+    border-radius: 0;
+  }
+}
+@media @desktop {
+  .poster {
+    border-radius: 10px;
+  }
+}
 .h1 {
   color: #fff;
   font-weight: 600;
@@ -134,6 +136,7 @@
     .next,
     .prev {
       opacity: 1;
+      transition: 0.5s;
     }
   }
   .next,
@@ -151,6 +154,8 @@
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.45);
     top: 40%;
+    transition: 0.5s;
+    color: #fff !important;
     &:hover svg {
       color: rgba(var(--tmdbLighterGreen), 0.9);
     }

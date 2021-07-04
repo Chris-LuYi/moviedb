@@ -1,6 +1,5 @@
 import { Rate, Skeleton } from 'antd';
 import ProCard from '@ant-design/pro-card';
-import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './index.less';
 import { Link } from 'umi';
@@ -19,6 +18,7 @@ export default (movieInfo: MoviePostInfo) => {
   } = movieInfo;
   return (
     <ProCard
+      className={styles.poster}
       key={id}
       layout="center"
       ghost
@@ -48,7 +48,6 @@ export default (movieInfo: MoviePostInfo) => {
           <Skeleton active paragraph={{ rows: 1 }} />
         )
       }
-      className={styles.poster}
     >
       <div className={styles.wrap}>
         {poster_path ? (

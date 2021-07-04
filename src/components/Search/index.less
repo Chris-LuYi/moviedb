@@ -1,0 +1,17 @@
+.search {
+  width: 100%;
+  :global {
+    input {
+      border-radius: 10px;
+    }
+    .ant-input-group-addon,
+    .ant-input-group-addon button {
+      border-radius: 0 10px 10px 0 !important;
+      background-image: linear-gradient(
+        to right,
+        rgba(var(--tmdbLightGreen), 1) 0%,
+        rgba(var(--tmdbLightBlue), 1) 100%
+      );
+    }
+  }
+}

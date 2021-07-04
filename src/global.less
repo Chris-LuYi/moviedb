@@ -1,5 +1,4 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~antd/dist/antd.less';
+@import './styles/default.less';
 
 @background-main: #000;
 @text-color: #fff;
@@ -71,6 +70,9 @@ h6 {
 input {
   color: #000 !important;
 }
+.ant-pro-global-header {
+  background-color: transparent;
+}
 .ant-layout {
   color: #fff;
 
@@ -87,8 +89,8 @@ input {
 }
 .ant-pro-card-ghost > .ant-pro-card-header {
   background-color: lighten(@background-main, 20%);
-  border-radius: 0 0 var(--imageBorderRadius) var(--imageBorderRadius);
 }
+
 .slick-dots {
   padding: 10px 40px;
   border: 1px solid #fff;
@@ -100,10 +102,6 @@ input {
 .ant-radio-button-wrapper-checked {
   background-color: #fff !important;
 }
-.ant-result-title,
-.ant-result-subtitle {
-  color: #fff !important;
-}
 .ant-pro-menu-item-title,
 .ant-menu-title-content svg {
   font-size: x-large !important;
@@ -111,4 +109,7 @@ input {
 }
 .ant-menu-item-selected {
   background-color: transparent !important;
+}
+.ant-result {
+  background-color: @bg-color-light;
 }
