@@ -108,9 +108,11 @@ export default function IndexPage(props) {
                     </span>
                   ))}
                 </span>
-                <span className="section">
-                  {runtime || episode_run_time[0]} minutes
-                </span>
+                {(runtime || episode_run_time?.[0]) && (
+                  <span className="section">
+                    {runtime || episode_run_time?.[0]} minutes
+                  </span>
+                )}
               </h3>
             </>
           )}
