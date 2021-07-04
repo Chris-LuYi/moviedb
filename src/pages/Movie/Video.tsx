@@ -12,7 +12,7 @@ export default ({ dataSource }) => {
   }, [currentVideo]);
   return (
     <div className={styles.video}>
-      <h1>Video {dataSource.length}</h1>
+      <h2>Video {dataSource.length}</h2>
 
       <div>
         {dataSource.map((o) => {

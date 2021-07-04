@@ -160,37 +160,38 @@ export default function IndexPage(props) {
         </div>
       </div>
       <Video dataSource={videos?.results} />
-
-      <div className={styles.castcrew}>
-        <section>
-          <h1>Cast {cast.length}</h1>
-          <div className={styles.casts}>
-            {cast.map((o) => {
-              const { profile_path, name, character, id: pid } = o;
-              return (
-                <div key={pid}>
-                  <Link
-                    className="avatar"
-                    to={`/person/${pid}/${getPathName(name)}`}
-                  >
-                    {profile_path ? (
-                      <img
-                        src={`${GLOBAL_CONFIG.imgServer}/t/p/w138_and_h175_face${profile_path}`}
-                      />
-                    ) : (
-                      <span className="no-photo" />
-                    )}
-                  </Link>
-                  <Link to={`/person/${pid}/${getPathName(name)}`}>
-                    <span className="bold">{name}</span>
-                  </Link>
-                  <span>{character}</span>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      </div>
+      {cast.length > 0 && (
+        <div className={styles.castcrew}>
+          <section>
+            <h2>Cast {cast.length}</h2>
+            <div className={styles.casts}>
+              {cast.map((o) => {
+                const { profile_path, name, character, id: pid } = o;
+                return (
+                  <div key={pid}>
+                    <Link
+                      className="avatar"
+                      to={`/person/${pid}/${getPathName(name)}`}
+                    >
+                      {profile_path ? (
+                        <img
+                          src={`${GLOBAL_CONFIG.imgServer}/t/p/w138_and_h175_face${profile_path}`}
+                        />
+                      ) : (
+                        <span className="no-photo" />
+                      )}
+                    </Link>
+                    <Link to={`/person/${pid}/${getPathName(name)}`}>
+                      <span className="bold">{name}</span>
+                    </Link>
+                    <span>{character}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
