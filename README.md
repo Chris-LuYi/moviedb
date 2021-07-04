@@ -2,15 +2,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Chris-LuYi/moviedb">
+    <img src="public/fav.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">A React based movie DB we website</h3>
 
   <p align="center">
     An movie info website powered by <a href="https://www.themoviedb.org/documentation/api">The Movie DB API</a>
-
     <a href="https://zen-franklin-214087.netlify.app/">View</a>
     
   </p>
@@ -27,41 +26,28 @@ Build this project for fun :smile:
 
 ### Built With
 
-
 * [React](https://reactjs.org/)
 * [UmiJS](https://umijs.org/)
 * [Ant Design](https://ant.design/)
 
-
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/Chris-LuYi/moviedb.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Run the dev server
+3. Run the dev server
     ```sh
    npm run start
    ```
-5. Build the project
+4. Build the project
     ```sh
    npm run build
    ```
-
 
 <!-- LICENSE -->
 ## License
