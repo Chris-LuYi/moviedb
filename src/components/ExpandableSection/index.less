@@ -1,0 +1,28 @@
+@import '../../styles/default.less';
+
+.root {
+  position: relative;
+
+  :global {
+    .content {
+      overflow: hidden;
+    }
+    .more {
+      opacity: 0;
+      cursor: pointer;
+      text-align: right;
+      &:hover {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &:hover {
+    :global {
+      .more {
+        opacity: 1;
+        transition: 0.5s;
+      }
+    }
+  }
+}

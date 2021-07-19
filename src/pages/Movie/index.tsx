@@ -10,13 +10,17 @@ import { getMovie } from '@/models/movie';
 import moment from 'moment';
 import { getPathName } from '@/utils';
 import notReady from '../../../public/img/not-ready.svg';
-import { PageLoading } from '@/components';
+import { PageLoading, ExpandableSection } from '@/components';
 import Icon from '@/components/Icon';
 import Video from './Video';
+import CastCrew from './CastCrew';
 const crewSortRank: any = {
   Creator: 0,
   Director: 1,
   Screenplay: 2,
+  Story: 3,
+  Producer: 4,
+  'Executive Producer': 5,
 };
 
 export default function IndexPage(props) {
@@ -61,10 +65,11 @@ export default function IndexPage(props) {
     releaseInfo?.release_dates?.[0] ||
     {};
   if (type === 'tv') {
-    certification = content_ratings.results.find((o) => o.iso_3166_1 === 'US')
-      ?.rating;
+    certification = content_ratings.results.find(
+      (o) => o.iso_3166_1 === 'US',
+    )?.rating;
   }
-
+  console.log(crew);
   return (
     <div className={styles.root}>
       <PageTitle title={name || title} />
@@ -162,37 +167,12 @@ export default function IndexPage(props) {
         </div>
       </div>
       <Video dataSource={videos?.results} />
-      {cast.length > 0 && (
-        <div className={styles.castcrew}>
-          <section>
-            <h2>Cast {cast.length}</h2>
-            <div className={styles.casts}>
-              {cast.map((o) => {
-                const { profile_path, name, character, id: pid } = o;
-                return (
-                  <div key={pid}>
-                    <Link
-                      className="avatar"
-                      to={`/person/${pid}/${getPathName(name)}`}
-                    >
-                      {profile_path ? (
-                        <img
-                          src={`${GLOBAL_CONFIG.imgServer}/t/p/w138_and_h175_face${profile_path}`}
-                        />
-                      ) : (
-                        <span className="no-photo" />
-                      )}
-                    </Link>
-                    <Link to={`/person/${pid}/${getPathName(name)}`}>
-                      <span className="bold">{name}</span>
-                    </Link>
-                    <span>{character}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        </div>
+      {cast.length > 0 && <CastCrew title="Cast" data={cast} />}
+      {crew.length > 0 && (
+        <CastCrew
+          title="Crew"
+          data={_.sortBy(crew, (o) => crewSortRank[o.job])}
+        />
       )}
     </div>
   );

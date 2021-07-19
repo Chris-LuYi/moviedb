@@ -25,6 +25,7 @@
     "@ant-design/pro-layout": "^6.5.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@umijs/preset-react": "1.x",
+    "ahooks": "^2.10.8",
     "antd": "^4.16.6",
     "react-redux": "^7.2.4",
     "umi": "^3.5.2"

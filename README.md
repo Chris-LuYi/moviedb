@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eea335f2-ce76-4649-9826-d989316f9ce0/deploy-status)](https://app.netlify.com/sites/zen-franklin-214087/deploys)
+
+
 
 <!-- PROJECT LOGO -->
 <br />
