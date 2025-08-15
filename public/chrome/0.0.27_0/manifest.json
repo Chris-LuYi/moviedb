@@ -1,0 +1,38 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "public/favicon.ico",
+         "16": "public/favicon.ico",
+         "48": "public/favicon.ico"
+      },
+      "default_title": "Module Federation"
+   },
+   "content_scripts": [ {
+      "js": [ "static/js/post-message-init.js", "static/js/post-message-listener.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "js": [ "static/js/fast-refresh.js", "static/js/snapshot-plugin.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start",
+      "world": "MAIN"
+   } ],
+   "description": "Tool for Module Federation",
+   "devtools_page": "public/createDevtools.html",
+   "host_permissions": [ "\u003Call_urls>" ],
+   "icons": {
+      "128": "public/favicon.ico",
+      "16": "public/favicon.ico",
+      "48": "public/favicon.ico"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi9TEueTP8JZxYpcu2jSi2e5dX0d9YwOFRe9sakuPnPOftWF3o6VQWq4J/2z27tDQXaQ9v+l+MbcUfqGy8UrHWkermxcqLV54PFcQq0xeP9raNOaJr4mewmZl9Sx2rHTxZy4eEOlTCpw9+4GX/JU8KZTCR38K5XSULRkUpRuLYINnVYHOtzopQoGZHEOtkTqmv9wEMGTz/7jdb2LtuCvll4sbxb9sKc5AmsfInYOZ/jfGpTV8e4bIIGt04rCr7l04jNSEf0nI/Pgyr2c23AqkRHV26p2C3rk/VRLpR+1fjPYmdLpIX1A6i3KZ2hikHXGhZifd6MH2WayBg1Jg31KZ8wIDAQAB",
+   "manifest_version": 3,
+   "name": "Module Federation",
+   "permissions": [ "storage", "scripting" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.0.27",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "static/js/post-message.js", "static/js/post-message-start.js", "static/js/fast-refresh.js", "static/js/snapshot-plugin.js" ]
+   } ]
+}

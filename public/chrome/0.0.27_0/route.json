@@ -1,0 +1,30 @@
+{
+  "routes": [
+    {
+      "urlPath": "/",
+      "entryName": "main",
+      "entryPath": "html/main/index.html",
+      "isSPA": true,
+      "isStream": false,
+      "isSSR": false
+    },
+    {
+      "urlPath": "/createDevtools.html",
+      "isSPA": true,
+      "isSSR": false,
+      "entryPath": "public/createDevtools.html"
+    },
+    {
+      "urlPath": "/devtools.js",
+      "isSPA": true,
+      "isSSR": false,
+      "entryPath": "public/devtools.js"
+    },
+    {
+      "urlPath": "/favicon.ico",
+      "isSPA": true,
+      "isSSR": false,
+      "entryPath": "public/favicon.ico"
+    }
+  ]
+}

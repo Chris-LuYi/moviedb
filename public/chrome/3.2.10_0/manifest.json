@@ -1,0 +1,62 @@
+{
+   "action": {
+      "default_icon": "img/logo/gray.png",
+      "default_popup": "devpanel.html#popup",
+      "default_title": "Redux DevTools"
+   },
+   "background": {
+      "service_worker": "background.bundle.js"
+   },
+   "commands": {
+      "_execute_action": {
+         "suggested_key": {
+            "default": "Ctrl+Shift+E"
+         }
+      },
+      "devtools-remote": {
+         "description": "Remote DevTools"
+      },
+      "devtools-window": {
+         "description": "DevTools window"
+      }
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "exclude_globs": [ "https://www.google*" ],
+      "js": [ "content.bundle.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "exclude_globs": [ "https://www.google*" ],
+      "js": [ "page.bundle.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start",
+      "world": "MAIN"
+   } ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+   },
+   "description": "Redux DevTools for debugging application's state changes.",
+   "devtools_page": "devtools.html",
+   "differential_fingerprint": "1.2233508907594b05bc643372531253b9306e86cf5ca548e5b4e7707f347860a3",
+   "externally_connectable": {
+      "ids": [ "*" ]
+   },
+   "homepage_url": "https://github.com/reduxjs/redux-devtools",
+   "host_permissions": [ "file:///*", "http://*/*", "https://*/*" ],
+   "icons": {
+      "128": "img/logo/128x128.png",
+      "16": "img/logo/16x16.png",
+      "48": "img/logo/48x48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsdJEPwY92xUACA9CcDBDBmbdbp8Ap3cKQ0DJTUuVQvqb4FQAv8RtKY3iUjGvdwuAcSJQIZwHXcP2aNDH3TiFik/NhRK2GRW8X3OZyTdkuDueABGP2KEX8q1WQDgjX/rPIinGYztUrvoICw/UerMPwNW62jwGoVU3YhAGf+15CgX2Y6a4tppnf/+1mPedKPidh0RsM+aJY98rX+r1SPAHPcGzMjocLkqcT75DZBXer8VQN14tOOzRCd6T6oy7qm7eWru8lJwcY66qMQvhk0osqEod2G3nA7aTWpmqPFS66VEiecP9PgZlp8gQdgZ3dFhA62exydlD55JuRhiMIR63yQIDAQAB",
+   "manifest_version": 3,
+   "name": "Redux DevTools",
+   "options_ui": {
+      "page": "options.html"
+   },
+   "permissions": [ "notifications", "contextMenus", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "3.2.10"
+}
